@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import useStyles from "./utils/useStyles";
+import Navbar from "./components/Layout/Navbar";
+import routes from "./router";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function ResponsiveDrawer() {
+    const classes = useStyles();
+
+    return (
+        <Router>
+        <div className={classes.root}>
+            <CssBaseline />
+            <Navbar/>
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
+                    <Switch>
+                        <main className={classes.content}>
+                            <>
+                                { routes.map((route, index) => (
+                                    <Route strict
+                                           component={route.component}
+                                           path={route.path}
+                                           title={route.title}/>
+                                )) }
+                            </>
+                        </main>
+                    </Switch>
+            </main>
+        </div>
+        </Router>
+    );
 }
-
-export default App;
