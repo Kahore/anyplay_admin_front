@@ -6,7 +6,7 @@ const UsersView: React.FC = () => {
   }, []);
   return (
     <>
-      <h2>Users will be shows here</h2>
+      <h2>Users will be shown here</h2>
     </>
   )
 }
