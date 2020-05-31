@@ -74,6 +74,7 @@ export default function ResponsiveDrawer() {
                 {/*         ))*/}
                 {/*}*/}
                 <Route exact path='/' render={()=><h2>Welcome to Aniplay admin panel!</h2>}/>
+                <Route exact path='/anyplay_admin_front' render={()=><h2>Welcome to Aniplay admin panel!</h2>}/>
                 <Route exact
                        path='/audiobooks'
                        component={AudiobooksView}

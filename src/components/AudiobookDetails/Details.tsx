@@ -1,7 +1,17 @@
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
-import {Button, Card, CardActions, CardContent, Link, ListItem, ListItemText, Typography} from "@material-ui/core";
-import List from "@material-ui/core/List";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Link,
+  ListItem,
+  ListItemText,
+  Typography,
+  List
+} from "@material-ui/core";
+import EditIcon from '@material-ui/icons/Edit';
 import {NavLink} from "react-router-dom";
 import {IAudiobook} from "../../models/audiobook";
 import {ICategory} from "../../models/category";
@@ -89,7 +99,14 @@ const AudiobookDetails: React.FC<{audiobook:IAudiobook|undefined}> = ({audiobook
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <NavLink to={`/audiobooks/${audiobook?.id}?mode=edit` }>
+          <Button size="small"
+                  color="primary"
+                  variant="contained"
+                  startIcon={<EditIcon/>}>
+            Edit
+          </Button>
+        </NavLink>
       </CardActions>
     </Card>
   );

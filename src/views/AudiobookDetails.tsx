@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import AudiobookDetails from "../components/AudiobookDetails/Details";
 import AudiobookForm from "../components/AudiobookDetails/Form";
 import AudiobooksService from "../service/audiobooks";
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 import PlaylistsTable from "../components/AudiobookDetails/PlaylistsTable";
 import {IAudiobook} from "../models/audiobook";
 import AudiobookService from "../service/audiobook";
@@ -26,10 +26,10 @@ const AudiobookDetailsView: React.FC = () => {
     category: []
   }
   let query = useQuery();
-  const mode = query.get('mode')
+  const mode =query.get('mode')
+  const history = useHistory();
   const {id} = useParams()
   const [audiobook, setAudiobook] = useState<IAudiobook>()
-  const [isSave, setIsSave] = useState<boolean>(false)
 
   const onFillForm = (key: any, value: any) => {
   // @ts-ignore
@@ -49,18 +49,17 @@ const AudiobookDetailsView: React.FC = () => {
     }
   }
  const onPostForm = () => {
+
     if(audiobook?.id) {
       AudiobookService.updateAudiobook(audiobook).then((response:IAudiobook)=>{
-        console.log(' -> response', response)
-        setIsSave(true)
+        setAudiobook(response)
       })
     } else {
       AudiobookService.postAudiobook(audiobook as IAudiobook).then((response:IAudiobook)=>{
-        console.log(' -> response', response)
         setAudiobook(response)
-        setIsSave(true)
       })
     }
+   history.push(`/audiobooks/${audiobook?.id}?mode=view`);
  }
   useEffect(() => {
     if(id === 'new')  {
@@ -83,8 +82,7 @@ const AudiobookDetailsView: React.FC = () => {
           <AudiobookForm audiobook={audiobook}
                          onFillForm={onFillForm}
                          onArrayChange={onArrayChange}
-                         onPostForm={onPostForm}
-                         isSave={isSave}/>
+                         onPostForm={onPostForm}/>
         </>
         :
         <>

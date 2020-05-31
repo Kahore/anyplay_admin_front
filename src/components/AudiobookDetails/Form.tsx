@@ -13,7 +13,6 @@ import {
   Select,
   Theme, FormControlLabel, Button
 } from "@material-ui/core";
-import {Redirect} from 'react-router-dom'
 import {KeyboardDatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import {makeStyles} from "@material-ui/core/styles";
@@ -36,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 const AudiobookForm: React.FC<{audiobook:IAudiobook | undefined,
-  onFillForm: any, onArrayChange: any, onPostForm: any, isSave: boolean}> = ({audiobook, onFillForm, onArrayChange, onPostForm, isSave}) => {
+  onFillForm: any, onArrayChange: any, onPostForm: any}> = ({audiobook, onFillForm, onArrayChange, onPostForm}) => {
   const classes = useStyles();
   const [categories, setCategories] = useState<ICategory[]>()
 
@@ -55,9 +54,9 @@ const AudiobookForm: React.FC<{audiobook:IAudiobook | undefined,
   const handleChange = (event:SyntheticEvent,arrayName: string, object: any) => {
     onArrayChange(arrayName,object)
   }
-  if (isSave) {
-    return (<Redirect to={`/audiobooks/${audiobook?.id}?mode=view`}/>)
-  }
+  // if (isSave) {
+  //   return (<Redirect to={`/audiobooks/${audiobook?.id}?mode=view`}/>)
+  // }
   return (
     <form onSubmit={handleSubmit}
           className={classes.root}>
