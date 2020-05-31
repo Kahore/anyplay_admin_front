@@ -11,7 +11,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Theme, FormControlLabel
+  Theme, FormControlLabel, Button
 } from "@material-ui/core";
 import {Redirect} from 'react-router-dom'
 import {KeyboardDatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
@@ -115,7 +115,11 @@ const AudiobookForm: React.FC<{audiobook:IAudiobook | undefined,
           </Grid>
         </Grid>
       </div>
-
+      <Button size="small"
+              variant="contained"
+              type="submit">
+        Save
+      </Button>
     </form>
 
 
