@@ -5,7 +5,6 @@ import AudiobooksService from "../service/audiobooks";
 import {IAudiobook} from "../models/audiobook";
 import AudiobookService from "../service/audiobook";
 
-
 const AudiobooksView: React.FC = () => {
   const [audiobooks, setAudiobooks] = useState<IAudiobook[]>([])
   useEffect(() => {
@@ -17,6 +16,9 @@ const AudiobooksView: React.FC = () => {
     //     abortController.abort();
     // };
   },[])
+  useEffect(() => {
+    document.title = "Audiobooks"
+  }, []);
   const onDeleteAudiobook = async (audiobookId: number) => {
     await AudiobookService.deleteAudiobook(audiobookId)
     setAudiobooks(audiobooks.filter(audiobook=>audiobook.id !== audiobookId))

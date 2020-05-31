@@ -73,7 +73,9 @@ const AudiobookDetailsView: React.FC = () => {
       })
     }
   },[])
-
+  useEffect(() => {
+    document.title = "Audiobook details"
+  }, []);
   return (
     <>
       {mode === 'edit' ?
