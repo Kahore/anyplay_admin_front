@@ -3,7 +3,7 @@ import {IAudiobook} from "../../models/audiobook";
 import CategoryService from "../../service/category";
 import {ICategory} from "../../models/category";
 import {
-  Button, Checkbox,
+  Checkbox,
   createStyles,
   FormControl,
   Grid,
@@ -40,8 +40,7 @@ const AudiobookForm: React.FC<{audiobook:IAudiobook | undefined,
   const classes = useStyles();
   const [categories, setCategories] = useState<ICategory[]>()
 
-const updateInputValue= (key: string, value: any ) => {
-  console.log('updateInputValue -> value', value)
+  const updateInputValue= (key: string, value: any ) => {
     onFillForm(key, value)
   }
   useEffect(() => {
@@ -60,13 +59,14 @@ const updateInputValue= (key: string, value: any ) => {
     return (<Redirect to={`/audiobooks/${audiobook?.id}?mode=view`}/>)
   }
   return (
-    <form onSubmit={handleSubmit} className={classes.root}>
+    <form onSubmit={handleSubmit}
+          className={classes.root}>
       <div>
         <FormControl className={classes.items}>
           <InputLabel htmlFor="title">Title</InputLabel>
           <Input name="title"
                  value={audiobook?.title}
-                 onChange={((event: any  )=> updateInputValue(event.target.name, event.target.value, ))}/>
+                 onChange={((event: any)=> updateInputValue(event.target.name, event.target.value, ))}/>
         </FormControl>
         <FormControl className={classes.items}>
           <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -98,7 +98,8 @@ const updateInputValue= (key: string, value: any ) => {
         <Grid container spacing={3}>
           <Grid item xs={10} sm={9} md={7} lg={7}>
             {categories?.map( category=> (
-              <FormControl key={category.id} className={classes.items} >
+              <FormControl key={category.id}
+                           className={classes.items} >
                 <FormControlLabel
                   control={
                     <Checkbox checked={(audiobook?.category.findIndex(x => x.id === category.id) !== -1)}
@@ -114,11 +115,7 @@ const updateInputValue= (key: string, value: any ) => {
           </Grid>
         </Grid>
       </div>
-      <Button size="small"
-              variant="contained"
-              type="submit">
-          Save
-       </Button>
+
     </form>
 
 

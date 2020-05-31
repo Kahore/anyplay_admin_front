@@ -15,3 +15,9 @@ export interface IAudiobook {
   image: string | null,
   drm?: string
 }
+export interface IAudiobookFiters {
+  search: string;
+  language: string | null;
+  publisher: string | null;
+  throwLine: string | null
+}

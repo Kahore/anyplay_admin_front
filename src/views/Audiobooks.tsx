@@ -2,20 +2,24 @@ import React, {useEffect, useState} from "react";
 import AudiobooksFilters from "../components/Audiobooks/Filters";
 import AudiobooksTable from "../components/Audiobooks/Table";
 import AudiobooksService from "../service/audiobooks";
-import {IAudiobook} from "../models/audiobook";
+import {IAudiobook, IAudiobookFiters} from "../models/audiobook";
 import AudiobookService from "../service/audiobook";
 
 const AudiobooksView: React.FC = () => {
   const [audiobooks, setAudiobooks] = useState<IAudiobook[]>([])
+  const [audiobooksFilter, setAudiobooksFilter] = useState<IAudiobookFiters>({
+    search: '',
+    publisher: null,
+    language: null,
+    throwLine: 'All'
+  })
   useEffect(() => {
-    // const abortController = new AbortController();
-    AudiobooksService.getAudiobooks().then((response:IAudiobook[])=> {
-      setAudiobooks(response)
-    })
-    // return function cleanup() {
-    //     abortController.abort();
-    // };
+    getAudiobooks()
   },[])
+  const getAudiobooks = async () => {
+    const data:IAudiobook[] = await AudiobooksService.getAudiobooks(audiobooksFilter)
+    setAudiobooks(data)
+  }
   useEffect(() => {
     document.title = "Audiobooks"
   }, []);
@@ -23,10 +27,17 @@ const AudiobooksView: React.FC = () => {
     await AudiobookService.deleteAudiobook(audiobookId)
     setAudiobooks(audiobooks.filter(audiobook=>audiobook.id !== audiobookId))
   }
+  const onFillFilter = (key: any, value: any) => {
+    setAudiobooksFilter({...audiobooksFilter, [key]:value })
+  }
   return (
     <>
-      <AudiobooksFilters/>
-      <AudiobooksTable audiobooks={audiobooks} onDeleteAudiobook={onDeleteAudiobook}/>
+      <AudiobooksFilters audiobooksFilter={audiobooksFilter}
+                         onFillFilter={onFillFilter}
+                         onFilterSearch={getAudiobooks}
+      />
+      <AudiobooksTable audiobooks={audiobooks}
+                       onDeleteAudiobook={onDeleteAudiobook}/>
       </>
   )
 }
