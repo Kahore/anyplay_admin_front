@@ -8,45 +8,44 @@ import LeftMenu from "./LeftMenu";
 import useStyles from "../../utils/useStyles";
 
 export default function Navbar() {
-    const classes = useStyles();
-    const [auth, setAuth] = React.useState(true);
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
+  const classes = useStyles();
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setAuth(event.target.checked);
-    };
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAuth(event.target.checked);
+  };
 
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
-    };
-    return (
-        <div className={classes.root}>
-            <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
-                    <NavLink to="/">
-                        <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            edge="start"
-                            onClick={handleDrawerToggle}
-                            className={classes.menuButton}>
-                            {/*<MenuIcon />*/}
-                            MenuIcon
-                        </IconButton>
-                    </NavLink>
-                    <Typography variant="h6" noWrap>
-                        'navigator'
-                    </Typography>
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+  return (
+    <div className={classes.root}>
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <NavLink to="/">
+            <IconButton color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={handleDrawerToggle}
+                        className={classes.menuButton}>
+              {/*<MenuIcon />*/}
+              MenuIcon
+            </IconButton>
+          </NavLink>
+          <Typography variant="h6" noWrap>
+            'navigator'
+          </Typography>
                     {/*{auth && (*/}
                     {/*    <div>*/}
                     {/*        <IconButton*/}
@@ -79,9 +78,9 @@ export default function Navbar() {
                     {/*        </Menu>*/}
                     {/*    </div>*/}
                     {/*)}*/}
-                </Toolbar>
-            </AppBar>
-            <LeftMenu/>
-        </div>
-    );
+        </Toolbar>
+      </AppBar>
+      <LeftMenu/>
+    </div>
+  );
 }

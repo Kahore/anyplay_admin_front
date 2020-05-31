@@ -8,9 +8,9 @@ import anyplayTheme from "./utils/theme";
 
 
 ReactDOM.render(
-    <MuiThemeProvider theme = { anyplayTheme }>
-        <App />
-    </MuiThemeProvider>,
+  <MuiThemeProvider theme = { anyplayTheme }>
+    <App />
+  </MuiThemeProvider>,
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>,

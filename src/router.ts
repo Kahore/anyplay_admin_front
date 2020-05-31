@@ -1,30 +1,27 @@
-import React from "react";
 import AudiobooksView from "./views/Audiobooks";
-import AudiobooksDetailsView from "./views/AudiobooksDetails";
+import AudiobookDetailsView from "./views/AudiobookDetails";
 import UsersView from "./views/Users";
+import {IRoute} from "./models/route";
 
-export interface IRoute {
-    path: string,
-    title: string,
-    isUsedInMenu: boolean,
-    component: React.FC
-}
 
 const routes:IRoute[] = [
     {
         path: '/audiobooks',
         title: 'Audiobooks',
+        mode: 'exact',
         isUsedInMenu: true,
         component: AudiobooksView
     },
     {
         path: '/audiobooks/:id',
         title: 'Audiobook details',
+        mode: 'strict',
         isUsedInMenu: false,
-        component: AudiobooksDetailsView
+        component: AudiobookDetailsView
     },
     {
         path: '/users',
+        mode: 'exact',
         isUsedInMenu: true,
         title: 'Users',
         component: UsersView,
