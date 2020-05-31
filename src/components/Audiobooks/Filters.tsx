@@ -1,7 +1,7 @@
 import React, {SyntheticEvent} from "react";
 import {
   Button,
-  createStyles, Divider,
+  createStyles,
   FormControl,
   Grid,
   Icon,
@@ -87,7 +87,7 @@ const AudiobooksFilters: React.FC<{audiobooksFilter:IAudiobookFiters,
               </Button>
             </Grid>
           </Grid>
-          <Divider/>
+          <br/>
           <div className={classes.root}>
             <Grid container
                   alignItems="center">
@@ -154,7 +154,6 @@ const AudiobooksFilters: React.FC<{audiobooksFilter:IAudiobookFiters,
               </Grid>
             </Grid>
           </div>
-
         </>
 
     )
