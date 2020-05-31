@@ -1,16 +1,12 @@
 import React, {useEffect} from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+import {Menu, MenuItem, Drawer, AppBar, Toolbar, Typography, IconButton} from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import {AccountCircle} from "@material-ui/icons";
 import LeftMenu from "./LeftMenu";
-import { useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -50,18 +46,19 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
       padding: theme.spacing(0, 1),
-      // necessary for content to be below app bar
       ...theme.mixins.toolbar,
       justifyContent: 'flex-end',
     },
-
+    title: {
+      flexGrow: 1,
+    },
   }),
 );
 const Navbar: React.FC<{onMenuChange:any}> = ({onMenuChange}) =>{
-  const location = useLocation();
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState<boolean>(false);
+  const [openProfile, setOpenProfile] = React.useState<boolean>(false);
   const [title, setTitle] = React.useState<string>(document.title);
   const handleDrawerOpen = () => {
     onMenuChange(true)
@@ -80,18 +77,17 @@ const Navbar: React.FC<{onMenuChange:any}> = ({onMenuChange}) =>{
     handleDrawerClose();
     setTitle(routeTitle)
   }
-  const [auth, setAuth] = React.useState(true);
+  const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setOpenProfile(true)
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
+    setOpenProfile(false)
     setAnchorEl(null);
   };
 
@@ -115,9 +111,42 @@ const Navbar: React.FC<{onMenuChange:any}> = ({onMenuChange}) =>{
           <MenuIcon />
 
         </IconButton>
-        <Typography variant="h6" noWrap>
+        <Typography variant="h6"
+                    noWrap
+                    className={classes.title}>
           {title}
         </Typography>
+        {auth && (
+          <div>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={openProfile}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>Sign out</MenuItem>
+            </Menu>
+          </div>
+        )}
       </Toolbar>
     </AppBar>
     <Drawer
