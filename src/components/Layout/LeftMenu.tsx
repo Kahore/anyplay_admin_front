@@ -10,6 +10,8 @@ import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import {useTheme} from "@material-ui/core/styles";
 import routes from '../../router'
+import IconButton from "@material-ui/core/IconButton";
+
 const LeftMenu: React.FC = () => {
   const theme = useTheme();
   const classes = useStyles();
@@ -41,31 +43,41 @@ const LeftMenu: React.FC = () => {
     </div>
     );
     return (
-      <nav className={classes.drawer} aria-label="mailbox folders">
-        <Hidden smUp implementation="css">
-          <Drawer variant="temporary"
-                  anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-                  open={mobileOpen}
-                  onClose={handleDrawerToggle}
-                  classes={{
-                    paper: classes.drawerPaper,
-                  }}
-                  ModalProps={{
-                    keepMounted: true, // Better open performance on mobile.
-                  }}
-                >
-            {drawer}
-          </Drawer>
-        </Hidden>
-        <Hidden xsDown implementation="css">
-          <Drawer classes={{paper: classes.drawerPaper}}
-                  variant="permanent"
-                  open
-          >
-            {drawer}
-          </Drawer>
-            </Hidden>
-      </nav>
+      <>
+        <nav className={classes.drawer}>
+          <IconButton color="inherit"
+                      aria-label="open drawer"
+                      edge="start"
+                      onClick={handleDrawerToggle}
+                      className={classes.menuButton}>
+            <img src={require("../../assets/menu.svg")} alt="menu" style={{maxHeight:25}}/>
+          </IconButton>
+          <Hidden smUp implementation="css">
+            <Drawer variant="temporary"
+                    anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                    open={mobileOpen}
+                    onClose={handleDrawerToggle}
+                    classes={{
+                      paper: classes.drawerPaper,
+                    }}
+                    ModalProps={{
+                      keepMounted: true, // Better open performance on mobile.
+                    }}
+            >
+              {drawer}
+            </Drawer>
+          </Hidden>
+          {/*<Hidden xsDown implementation="css">*/}
+          {/*  <Drawer classes={{paper: classes.drawerPaper}}*/}
+          {/*          variant="permanent"*/}
+          {/*          open*/}
+          {/*  >*/}
+          {/*    {drawer}*/}
+          {/*  </Drawer>*/}
+          {/*</Hidden>*/}
+        </nav>
+        </>
+
     )
 }
 

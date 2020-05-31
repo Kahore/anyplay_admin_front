@@ -11,13 +11,14 @@ import UsersView from "./views/Users";
 export default function ResponsiveDrawer() {
   const classes = useStyles();
 
+
   return (
     <Router>
       <div className={classes.root}>
         <CssBaseline />
-        <Navbar/>
-        <Container  className={classes.content}>
-          <div className={classes.toolbar} />
+        <Container className={classes.content}>
+          // @ts-ignore
+          <Navbar/>
           <Switch>
             <main className={classes.content}>
               <>
